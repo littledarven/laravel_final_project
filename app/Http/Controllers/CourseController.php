@@ -13,7 +13,12 @@ class CourseController extends Controller
     }
     public function create()
     {
-        return view('courses/new');
+        if((auth()->user()->is_admin==1))
+        {
+            return view('courses/new');    
+        }
+        \Session::flash('status', 'Você não tem permissão para acessar essa área !');
+        return redirect('/courses');
     }
     public function store(CourseRequest $request)
     {
@@ -33,8 +38,13 @@ class CourseController extends Controller
     }
     public function edit($id)
     {
-        $course = Course::findOrFail($id);
-        return view('courses/edit',['course' => $course]);
+        if((auth()->user()->is_admin==1))
+        {
+            $course = Course::findOrFail($id);
+            return view('courses/edit',['course' => $course]);
+        }
+        \Session::flash('status', 'Você não tem permissão para acessar essa área !');
+        return redirect('/courses');
     }
     public function update(StateRequest $request, $id)
     {
@@ -44,9 +54,14 @@ class CourseController extends Controller
     }
     public function destroy($id)
     {
-        $course = Course::findOrFail($id);
-        $course->delete();
-        \Session::flash('status', 'Curso deletado com sucesso.');
+        if((auth()->user()->is_admin==1))
+        {
+            $course = Course::findOrFail($id);
+            $course->delete();
+            \Session::flash('status', 'Curso deletado com sucesso.');
+            return redirect('/courses');
+        }
+        \Session::flash('status', 'Você não tem permissão para acessar essa área !');
         return redirect('/courses');
     }
 }
