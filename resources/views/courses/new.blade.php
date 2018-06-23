@@ -16,7 +16,7 @@
                         </div>
                     @endif
 
-                    {!! Form::open(['url' => '/states', 'method' => 'post','class' => 'form-group col-10']) !!}
+                    {!! Form::open(['url' => '/courses', 'method' => 'post','class' => 'form-group col-10']) !!}
                         
                         {{ Form::label('name', 'Nome',['class'=>'col-sm-2 col-form-label' ])}}
                         {{ Form::text('name',null,['class' => 'form-control col-3','required']) }}
@@ -29,7 +29,7 @@
                         {{ Form::text('total_time',null,['class' => 'form-control col-3','required','type' => 'number']) }}
 
                         @if ($errors->has('total_time'))
-                            <div class="error" style="color: red">{{ $errors->first('initials') }}</div>
+                            <div class="error" style="color: red">{{ $errors->first('total_time') }}</div>
                         @endif
 
                         <br /><br />

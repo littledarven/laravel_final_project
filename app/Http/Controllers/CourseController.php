@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Course;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\CourseRequest;
 class CourseController extends Controller
 {
     public function index()
     {
-        $courses = Course::All();
+        $courses = Course::paginate(15);
         return view('courses/index',['courses'=>$courses]);
     }
     public function create()
@@ -33,7 +33,7 @@ class CourseController extends Controller
     }
     public function edit($id)
     {
-        $course = $Course::findOrFail($id);
+        $course = Course::findOrFail($id);
         return view('courses/edit',['course' => $course]);
     }
     public function update(StateRequest $request, $id)

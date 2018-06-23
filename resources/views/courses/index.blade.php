@@ -70,9 +70,32 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
-            @yield('content')
+                @yield('content')
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Carga Horária</th>
+                        <th>Inscrever-me</th>
+                    </tr>
+                    @foreach($courses as $course)
+                    
+                    <tr>
+                            <td>{{ $course->id }}</td>
+                            <td>{{ $course->name }}</td>
+                            <td>{{ $course->total_time}}</td>
+                            <td>
+                            <div id="buttons">
+                                {!! Form::open(['url' => "/enrollments/$course->id",'method' => 'post']) !!}
+                                {!! Form::submit('+',['id' => 'enroll-button'])!!}
+                                {!! Form::close() !!}
+                            </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                    {{ $courses->links()}}
+                </table>    
         </main>
     </div>
 </body>
