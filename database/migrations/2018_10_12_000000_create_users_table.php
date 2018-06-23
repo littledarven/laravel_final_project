@@ -18,15 +18,12 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('type_id')->unsigned()->default('1');
-            $table->foreign('type_id')
-                ->references('id')->on('types')
-                ->onDelete('cascade');
+            $table->boolean('is_adm')->default('0');
+            $table->boolean('is_super_adm')->default('0');
             $table->rememberToken();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
