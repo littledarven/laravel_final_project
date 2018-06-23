@@ -19,7 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('is_adm')->default('0');
-            $table->boolean('is_super_adm')->default('0');
             $table->rememberToken();
             $table->timestamps();
         });
