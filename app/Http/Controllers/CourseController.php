@@ -51,6 +51,7 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
         $course->name = $request->input('name');
         $course->total_time = $request->input('total_time');
+        $course->save();
     }
     public function destroy($id)
     {
@@ -64,4 +65,5 @@ class CourseController extends Controller
         \Session::flash('status', 'Você não tem permissão para acessar essa área !');
         return redirect('/courses');
     }
+
 }
