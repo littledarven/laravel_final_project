@@ -21,7 +21,6 @@
                                 <th>Inscrever-me</th>
                             </tr>
                             @foreach($courses as $course)
-                            
                             <tr>
                                     <td>{{ $course->id }}</td>
                                     <td>{{ $course->name }}</td>
