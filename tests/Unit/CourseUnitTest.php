@@ -6,9 +6,11 @@ use Tests\TestCase;
 use App\Course;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class CourseTest extends TestCase
+class CourseUnitTest extends TestCase
 {
+    use DatabaseTransactions;
     /**
      * A basic test example.
      *
@@ -17,10 +19,10 @@ class CourseTest extends TestCase
     public function testCreateCourse()
     {
         Course::create([
-            'name' => 'Educação Fisíca',
+            'name' => 'Educação_Fisíca',
             'total_time' => 50,
 
         ]);
-        $this->assertDatabaseHas('courses',['name'=>'Educação Fisíca']);
+        $this->assertDatabaseHas('courses',['name'=>'Educação_Fisíca']);
     }
 }
