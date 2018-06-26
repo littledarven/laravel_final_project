@@ -1,3 +1,9 @@
+<script>
+    function ConfirmTurnAdmin()
+    {
+        return confirm('Tem certeza desta ação?');
+    }
+</script>
 @extends('layouts.app')
 @section('content')
 <div class="container">
@@ -28,8 +34,7 @@
                             <td>
                                 @if(auth()->user()->is_admin==1)
                                 <div id="buttons">
-                                    {{-- ARRUMAR !!!!!!--}}
-                                    {!! Form::open(['url' => "/students/$student->id",'method' => 'patch']) !!}
+                                    {!! Form::open(['url' => "/students/$student->id",'method' => 'patch', 'onsubmit' => 'return ConfirmTurnAdmin()']) !!}
                                     {!! Form::submit('+',['id' => 'turn_admin-button'])!!}
                                     {!! Form::close() !!}
                                 </div>
