@@ -17,15 +17,18 @@
                             <th>Nome</th>
                             <th>Carga Horária</th>
                             <th>Data de Matrícula</th>
+                            <th>Matrícula efetivada</th>
                         </tr>
-                        @foreach($enrollments as $enrollment)
+                        @foreach($user->courses as $enrollment)
                         <tr>
                             <td>{{ $enrollment->id }}</td>
                             <td>{{ $enrollment->name }}</td>
-                            <td>{{ $enrollments->total_time}}</td>
+                            <td>{{ $enrollment->total_time}}</td>
+                            <td>{{ $enrollment->created_at}}</td>
+                            <td>{{ $enrollment->is_aproved}}</td>
                         </tr>
                         @endforeach
-                        {{ $enrollments->links()}}
+                       
                     </table>    
                 </main>
             </div>

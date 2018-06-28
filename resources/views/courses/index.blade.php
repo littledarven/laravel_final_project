@@ -11,7 +11,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header" style="text-align:center">Disciplinas Disponíveis</div>
-
                 <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
@@ -38,7 +37,9 @@
                             <td>
                                 <div id="buttons">
                                     {{-- ARRUMAR !!!!!!--}}
-                                    {!! Form::open(['url' => "/enrollments/$course->id",'method' => 'post', 'onsubmit' => 'return ConfirmEnrollment()']) !!}
+                                    {!! Form::open(['url' => "/enrollments",'method' => 'post', 
+                                    'onsubmit' => 'return ConfirmEnrollment()']) !!}
+                                    {{ Form::hidden('id',$course->id) }}
                                     {!! Form::submit('+',['id' => 'enroll-button'])!!}
                                     {!! Form::close() !!}
                                 </div>
