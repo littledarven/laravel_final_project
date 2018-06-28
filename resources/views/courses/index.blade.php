@@ -23,13 +23,18 @@
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Carga Horária</th>
+                            @if(auth()->user()->is_admin==0)
                             <th>Inscrever-me</th>
+                            @else
+                            <th>Editar</th>
+                            @endif
                         </tr>
                         @foreach($courses as $course)
                         <tr>
                             <td>{{ $course->id }}</td>
                             <td>{{ $course->name }}</td>
                             <td>{{ $course->total_time}}</td>
+                            @if(auth()->user()->is_admin==0)
                             <td>
                                 <div id="buttons">
                                     {{-- ARRUMAR !!!!!!--}}
@@ -37,6 +42,11 @@
                                     {!! Form::submit('+',['id' => 'enroll-button'])!!}
                                     {!! Form::close() !!}
                                 </div>
+                            </td>
+                            @else
+                            <td>
+                            <a href="/courses/{{ $course->id }}/edit" class="btn btn-outline-dark" id="edit">Editar</a>
+                            @endif
                             </td>
                         </tr>
                         @endforeach
