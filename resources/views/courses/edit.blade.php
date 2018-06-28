@@ -16,7 +16,6 @@
                         </div>
                     @endif
                     {!! Form::open(['url' => "/courses/$course->id", 'method' => 'put', 'class'=>'form-group col-10']) !!}
-                        
                         {{ Form::label('name', 'Nome',['class'=>'col-sm-6 col-form-label']) }}
                         {{ Form::text('name', $course->name, ['class' => 'form-control col-3','required']) }}
                         
