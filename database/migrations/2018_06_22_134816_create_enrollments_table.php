@@ -15,9 +15,15 @@ class CreateEnrollmentsTable extends Migration
     {
         Schema::create('enrollments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_id');
-            $table->integer('course_id');
-            $table->integer('is_aproved')->default('0');
+            $table->integer('student_id')->unsigned();
+            $table->foreign('student_id')
+                ->references('id')
+                ->on('users');
+            $table->integer('course_id')->unsigned();
+            $table->foreign('course_id')
+                ->references('id')
+                ->on('courses');
+            $table->integer('is_aproved')->default(false);
             $table->timestamps();
         });
     }
