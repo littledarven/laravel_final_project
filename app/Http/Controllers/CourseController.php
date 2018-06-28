@@ -9,7 +9,7 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::paginate(15);
-        return view('courses/index',['courses'=>$courses]);
+        return view('courses/index',['courses'=> $courses]);
     }
     public function create()
     {
@@ -46,12 +46,14 @@ class CourseController extends Controller
         \Session::flash('status', 'Você não tem permissão para acessar essa área !');
         return redirect('/courses');
     }
-    public function update(StateRequest $request, $id)
+    public function update(CourseRequest $request, $id)
     {
         $course = Course::findOrFail($id);
         $course->name = $request->input('name');
         $course->total_time = $request->input('total_time');
         $course->save();
+        \Session::flash('status','Curso editado com sucesso !');
+        return redirect('/courses');
     }
     public function destroy($id)
     {
