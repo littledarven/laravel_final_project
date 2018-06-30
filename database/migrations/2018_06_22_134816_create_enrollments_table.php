@@ -18,12 +18,12 @@ class CreateEnrollmentsTable extends Migration
             $table->integer('student_id')->unsigned();
             $table->foreign('student_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')->onDelete('cascade');
             $table->integer('course_id')->unsigned();
             $table->foreign('course_id')
                 ->references('id')
-                ->on('courses');
-            $table->integer('is_aproved')->default(false);
+                ->on('courses')->onDelete('cascade');
+            $table->integer('is_authorized')->default(false);
             $table->timestamps();
         });
     }
