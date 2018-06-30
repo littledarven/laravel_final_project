@@ -18,10 +18,15 @@ class DatabaseSeeder extends Seeder
         	$user->name = "Master";
         	$user->is_admin = true;
         	$user->email = "master@root.com";
+            $user->cpf = "87241570";
+            $user->rg = "10219271";
+            $user->adress = "Rua A";
+            $user->phone = "983839183";
         	$user->password = Hash::make("drmaster");
         	$user->save();
-
-
         }
+        $this->call([
+            CourseSeeder::class
+        ]);
     }
 }
