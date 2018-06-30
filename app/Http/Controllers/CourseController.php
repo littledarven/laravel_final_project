@@ -8,7 +8,7 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $courses = Course::paginate(15);
+        $courses = Course::where('max_students','>','0')->paginate(15);
         return view('courses/index',['courses'=> $courses]);
     }
     public function create()
