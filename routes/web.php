@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('enrollments/activate_enrollments','EnrollmentController@showInactivate');
 Route::resource('students','StudentController');
 Route::resource('enrollments','EnrollmentController');
 Route::resource('courses','CourseController');
