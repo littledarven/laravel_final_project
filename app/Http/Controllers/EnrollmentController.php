@@ -7,6 +7,8 @@ use App\User;
 use App\Enrollment;
 use App\Course;
 use App\Http\Requests\EnrollmentRequest;
+use Notification;
+use App\Notifications\PendingAuthorisations;
 
 class EnrollmentController extends Controller
 {
@@ -29,8 +31,8 @@ class EnrollmentController extends Controller
     	$enrollment->student_id = auth()->user()->id;
         $course_id = $request->input('id');
         $enrollment->course_id = $request->input('id');
-    	 
-    	 if($enrollment->save())
+        $course = Course::findOrFail($course_id);
+    	if($enrollment->save())
     	 {
             $course = Course::findOrFail($course_id); 
             $course->max_students-=1;
@@ -44,5 +46,19 @@ class EnrollmentController extends Controller
              return redirect('/courses');
     	 }
     	
+     }
+     public function showInactivate()
+     {
+        $students = User::where('is_admin','0')
+            ->whereIn('id', (auth()->user())->courses->pluck('pivot')->pluck('student_id'))->paginate(15);
+        return view ('enrollments/activate_enrollments',['students' => $students]);
+     }
+     public function update($id)
+     {
+        $enrollment = Enrollment::findOrFail($id);
+        $enrollment->is_authorised = true;
+        $enrollment->save();
+        \Session::flash('status', 'Matrícula aprovada !');
+        return redirect('/enrollments/activate_enrollments');
      }
 }
