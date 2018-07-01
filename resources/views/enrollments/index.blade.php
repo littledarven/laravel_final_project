@@ -20,7 +20,9 @@
 							<th>ID</th>
 							<th>Nome</th>
 							<th>Ver informações</th>
+							@if(auth()->user()->is_admin==0)
 							<th>Matrícula efetivada</th>
+							@endif
 						</tr>
 						@if(auth()->user()->is_admin==0)
 
@@ -28,7 +30,7 @@
 						<tr>
 							<td>{{ $enrollment->id }}</td>
 							<td>{{ $enrollment->name }}</td>
-							@if($enrollment->pivot->is_authorized==0)
+							@if($enrollment->pivot->is_authorised==0)
 							<td>Não</td>
 							@else
 							<td>Sim</td>
@@ -42,6 +44,7 @@
 							<td> {{$student->name}}</td>
 							<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{$student->id}}">Visualizar</button></td>
 						</tr>
+
 						<div class="modal fade" id="myModal{{$student->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
@@ -55,15 +58,14 @@
 											<p><b>ID - </b>{{ $enrollment->id }}</p>
 											<p><b>Disciplina - </b>{{ $enrollment->name }}</p>
 											<p><b>Matrícula Efetivada - </b>
-											@if($enrollment->pivot->is_authorized==0)
-											Não
-											@else
-											Sim
-											@endif
+												@if($enrollment->pivot->is_authorized==0)
+												Não
+												@else
+												Sim
+												@endif
 											</p>
 											<hr>
 											@endforeach
-
 										</div>
 									</div>
 									<div class="modal-footer">
@@ -75,8 +77,6 @@
 						@endforeach
 						@endif
 					</table>	
-					
-				</main>
 			</div>
 		</div>
 	</div>
