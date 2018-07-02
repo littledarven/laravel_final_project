@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Notification;
 use Illuminate\Http\Request;
 use App\User;
 use App\Enrollment;
 use App\Course;
 use App\Http\Requests\EnrollmentRequest;
-use Notification;
-use App\Notifications\PendingAuthorisations;
+use App\Notifications\PendingAuthorisation;
 
 class EnrollmentController extends Controller
 {
@@ -37,6 +37,12 @@ class EnrollmentController extends Controller
             $course = Course::findOrFail($course_id); 
             $course->max_students-=1;
             $course->save();
+            // auth()->user()->notify(new PendingAuthorisation ($course->name));
+            $admins = User::where('is_admin',1)->get();
+            foreach ($admins as $admin) 
+            {
+                $admin->notify(new PendingAuthorisation($course->name));
+            }
     	 	\Session::flash('status', 'Matrícula em estado de aprovação !');
              return redirect('/enrollments');
     	 }
@@ -49,15 +55,32 @@ class EnrollmentController extends Controller
      }
      public function showInactivate()
      {
-        $students = User::where('is_admin','0')
-            ->whereIn('id', (auth()->user())->courses->pluck('pivot')->pluck('student_id'))->paginate(15);
+        
+        if(auth()->user()->is_admin==0)
+        {
+            \Session::flash('status', 'Você não tem permissão para acessar essa área !');
+            return redirect('/enrollments');
+        }
+        $users = User::where('is_admin','0');
+        $enrollments = Enrollment::select('student_id');
+        $students = User::whereIn('id', $enrollments)->paginate(15);
         return view ('enrollments/activate_enrollments',['students' => $students]);
      }
      public function update($id)
      {
+        if(auth()->user()->is_admin==0)
+        {
+            \Session::flash('status', 'Você não tem permissão para acessar essa área !');
+            return redirect('/enrollments');
+        }
+
         $enrollment = Enrollment::findOrFail($id);
         $enrollment->is_authorised = true;
         $enrollment->save();
+        $user = auth()->user();
+        foreach ($user->unreadNotifications as $notification) {
+        $notification->markAsRead();
+        }
         \Session::flash('status', 'Matrícula aprovada !');
         return redirect('/enrollments/activate_enrollments');
      }

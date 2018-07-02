@@ -18,6 +18,7 @@ class StudentController extends Controller
 	        $course = User::findOrFail($id);
 	        $course->is_admin = 1;
 	        $course->save();
+            
 	        \Session::flash('status', 'Usuário transformado em administrador !');
         	return redirect('/students');
     	}
