@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @section('content')
 <div class="container">
@@ -58,7 +59,7 @@
 											<p><b>ID - </b>{{ $enrollment->id }}</p>
 											<p><b>Disciplina - </b>{{ $enrollment->name }}</p>
 											<p><b>Matrícula Efetivada - </b>
-												@if($enrollment->pivot->is_authorized==0)
+												@if($enrollment->pivot->is_authorised==0)
 												Não
 												@else
 												Sim
@@ -76,11 +77,12 @@
 						</div>
 						@endforeach
 						@endif
+						 
 					</table>	
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 </div>
 @endsection
