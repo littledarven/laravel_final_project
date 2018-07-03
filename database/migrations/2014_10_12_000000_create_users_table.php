@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_admin')->default('0');
             $table->bigInteger('cpf')->unique();
             $table->bigInteger('rg')->unique();
-            $table->string('adress');
+            $table->string('address');
             $table->bigInteger('phone');
             $table->rememberToken();
             $table->timestamps();
