@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CourseRequest;
 class CourseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function allCourses()
     {
         if(auth()->user()->is_admin==1)

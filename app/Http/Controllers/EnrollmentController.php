@@ -13,6 +13,11 @@ use App\Notifications\EnrollmentAuthorisationGranted;
 
 class EnrollmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function studentIndex()
     {
         if(auth()->user()->is_admin==0)
@@ -20,7 +25,8 @@ class EnrollmentController extends Controller
             \Session::flash('status', 'Você não tem permissão para acessar essa área !');
             return redirect('/enrollments');
         }
-        $students = User::where('is_admin',0);
+        $students = User::where('is_admin',0)->get();
+        
         return view('enrollments/index',['students'=> $students]);   
     }
     public function index()

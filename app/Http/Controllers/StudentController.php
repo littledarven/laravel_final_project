@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\User;
 class StudentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $students = User::where('is_admin',0)->paginate(15);
