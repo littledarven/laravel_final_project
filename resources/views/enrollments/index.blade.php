@@ -37,40 +37,6 @@
 								</div>
 							</td>
 						</tr>
-						<div class="modal fade" id="myModal{{$student->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header"></button>
-										<h4 class="modal-title" id="myModalLabel">Informações do Aluno - {{$student->name}}</h4>
-									</div>
-									<div class="modal-body">
-										<div id="body-content">
-											@foreach($student->courses as $enrollment)
-											<p><b>ID - </b>{{ $enrollment->id }}</p>
-											<p><b>Disciplina - </b>{{ $enrollment->name }}</p>
-											<p><b>Matrícula Efetivada - </b>
-												@if($enrollment->pivot->is_authorised==0)
-												Não
-												@else
-												Sim
-												@endif
-
-											</p>
-											{{-- <div id="buttons">
-												{!! Form::open(['url' => "/enrollments/$enrollment->pivot->is_authorised",'method' => 'delete', 'onsubmit' => 'return ConfirmTurnAdmin()']) !!}
-												{!! Form::submit('Deletar Matrícula',['id' => 'turn_admin-button','class' => 'btn btn-outline-danger'])!!}
-												{!! Form::close() !!}
-											</div>
-											<hr> --}}
-											@endforeach
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-									</div>
-								</div>
-							</div>
-						</div>
 						@endforeach
 					</table>	
 				</div>
@@ -79,5 +45,42 @@
 	</div>
 </div>
 </div>
+@foreach($students as $student)
+	<div class="modal fade" id="myModal{{$student->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header"></button>
+					<h4 class="modal-title" id="myModalLabel">Informações do Aluno - {{$student->name}}</h4>
+				</div>
+				<div class="modal-body">
+					<div id="body-content">
+						@foreach($student->courses as $enrollment)
+						<p><b>ID - </b>{{ $enrollment->id }}</p>
+						<p><b>Disciplina - </b>{{ $enrollment->name }}</p>
+						<p><b>Matrícula Efetivada - </b>
+							@if($enrollment->pivot->is_authorised==0)
+							Não
+							@else
+							Sim
+							@endif
+
+						</p>
+						<div id="buttons">
+
+							{!! Form::open(['url' => "enrollments/$enrollment->id",'method' => 'delete', 'onsubmit' => 'return ConfirmTurnAdmin()']) !!}
+								{!! Form::submit('Deletar Matrícula',['id' => 'delete_enrollment','class' => 'btn btn-outline-danger']) !!}
+							{!! Form::close() !!}
+						</div>
+						<hr>
+						@endforeach
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+@endforeach
 @endsection
 
