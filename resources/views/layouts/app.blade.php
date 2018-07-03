@@ -55,25 +55,35 @@
 							<a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="">
 								<i class="far fa-envelope"><span class="badge badge-secondary">{{count(auth()->user()->unreadNotifications)}}</span></i>
 							</a>
-							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-								@foreach(auth()->user()->unreadNotifications as $notification)
-								<strong><a class="dropdown-item" href="/enrollments/activate_enrollments">{{$notification->data['data']}}{{$notification->data['user']}} {{$notification->data['course']}}	</a></strong>
-								@endforeach
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="text-align: center;">
+								@if(count(auth()->user()->unreadNotifications)==0)
+									<strong class="dropdown-item">Sem notificações</strong>
+								@else
+									@foreach(auth()->user()->unreadNotifications as $notification)
+										@if(!(isset($notification->data['user'])))
+											<strong><a class="dropdown-item" href="/notifications/{{$notification->id}}">{{$notification->data['data']}} {{$notification->data['course']}}</a></strong>
+										@else
+											<strong><a class="dropdown-item" href="/notifications2/{{$notification->id}}">{{$notification->data['data']}}{{$notification->data['user']}} {{$notification->data['course']}}</a></strong>
+										
+										@endif
+									@endforeach
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="/notifications">MARCAR TODAS COMO LIDAS</a>
+								@endif
 							</div>
-					</li>
-					
+						</li>
 						<li class="nav-item dropdown">
 							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 								{{ Auth::user()->name }} <span class="caret"></span>
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-								@if(auth()->user()->is_admin==0)
 								<a class="dropdown-item" href="/enrollments"> Minhas Disciplinas </a>
 								<a class="dropdown-item" href="/courses"> Disciplinas Disponíveis </a>
-								@else
-								<a class="dropdown-item" href="/courses">Disciplinas</a>
-								<a class="dropdown-item" href="/enrollments">Estudantes</a>
+								@if(auth()->user()->is_admin==1)
+								<a class="dropdown-item" href="/courses/allcourses">Todas as Disciplinas</a>
+								<a class="dropdown-item" href="/enrollments/activate_enrollments">Autorizações Pendentes</a>
+								<a class="dropdown-item" href="/enrollments/enrollment">Estudantes</a>
 								@endif
 								<a class="dropdown-item" href="/admins">Administradores</a>
 								<a class="dropdown-item" href="{{ route('logout') }}"
@@ -99,3 +109,5 @@
 </div>
 </body>
 </html>
+
+<script>

@@ -29,6 +29,13 @@
                         @if ($errors->has('total_time'))
                             <div class="error" style="color: red">{{ $errors->first('citizens') }}</div>
                         @endif
+
+                        {{ Form::label('description', 'Descrição',['class'=>'col-sm-2 col-form-label']) }}
+                        {{ Form::text('description',$course->description,['class' => 'form-control col-3','required','type' => 'text']) }}
+
+                        {{ Form::label('max_students', 'Máximo Estudantes',['class'=>'col-sm-2 col-form-label']) }}
+                        {{ Form::text('max_students',$course->max_students,['class' => 'form-control col-3','required','type' => 'number']) }}
+
                         <br>
                         {!!Form::submit('Salvar',['class'=>'btn btn-outline-primary col-2'])!!}
                     {!! Form::close() !!}

@@ -32,6 +32,19 @@
                             <div class="error" style="color: red">{{ $errors->first('total_time') }}</div>
                         @endif
 
+                        {{ Form::label('description', 'Descrição',['class'=>'col-sm-2 col-form-label']) }}
+                        {{ Form::text('description',null,['class' => 'form-control col-3','required','type' => 'text']) }}
+
+                        @if ($errors->has('description'))
+                            <div class="error" style="color: red">{{ $errors->first('description') }}</div>
+                        @endif
+                        
+                        {{ Form::label('max_students', 'Máximo Estudantes',['class'=>'col-sm-2 col-form-label']) }}
+                        {{ Form::text('max_students',null,['class' => 'form-control col-3','required','type' => 'number']) }}
+
+                        @if ($errors->has('max_students'))
+                            <div class="error" style="color: red">{{ $errors->first('max_students') }}</div>
+                        @endif
                         <br /><br />
 
                         {{ Form::submit('Cadastrar',['class'=>'btn btn-outline-success col-2']) }}
