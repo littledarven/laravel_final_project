@@ -97,11 +97,11 @@ class EnrollmentController extends Controller
         {
             $enroll = Enrollment::findOrFail($id);
             $enroll->delete();
-            \Session::flash('status', 'Matrícula deletado com sucesso.');
-            return redirect('/courses');
+            \Session::flash('status', 'Matrícula deletada com sucesso.');
+            return redirect('/enrollments/enrollment');
         }
         \Session::flash('status', 'Você não tem permissão para acessar essa área !');
-        return redirect('/courses');
+        return back();
         
 
     }
