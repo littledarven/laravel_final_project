@@ -6,6 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CourseRequest;
 class CourseController extends Controller
 {
+    public function allCourses()
+    {
+        if(auth()->user()->is_admin==1)
+        {
+            $courses = Course::paginate(15);
+            return view('courses/allcourses',['courses'=> $courses]);    
+        }
+        \Session::flash('status', 'Você não tem permissão para acessar essa área !');
+        return redirect('/courses');
+        
+    }
     public function index()
     {
         $courses = Course::whereNotIn('id', (auth()->user())->courses->pluck('id'))->where('max_students','>','0')->paginate(15);
@@ -25,6 +36,8 @@ class CourseController extends Controller
         $course = new Course;
         $course->name = $request->input('name');
         $course->total_time = $request->input('total_time');
+        $course->description = $request->input('description');
+        $course->max_students = $request->input('max_students');
         if($course->save())
         {
             \Session::flash('status', 'Curso cadastrado com sucesso !');
@@ -51,6 +64,8 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
         $course->name = $request->input('name');
         $course->total_time = $request->input('total_time');
+        $course->description = $request->input('description');
+        $course->max_students = $request->input('max_students');
         $course->save();
         \Session::flash('status','Curso editado com sucesso !');
         return redirect('/courses');
