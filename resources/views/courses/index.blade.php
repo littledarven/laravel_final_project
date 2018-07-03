@@ -17,7 +17,7 @@
                 </div>
                 <div class="card-body">
                     @if (session('status'))
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-light" role="alert" style="text-align: center;">
                         {{ session('status') }}
                     </div>
                     @endif
@@ -32,13 +32,13 @@
                         <tr>
                             <td>{{ $course->id }}</td>
                             <td>{{ $course->name }}</td>
-                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{$course->id}}">Visualizar</button></td>
+                            <td><button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#myModal{{$course->id}}">Visualizar</button></td>
                             <td>
                                 <div id="buttons">
                                     {!! Form::open(['url' => "/enrollments",'method' => 'post', 
                                     'onsubmit' => 'return ConfirmEnrollment()']) !!}
                                     {{ Form::hidden('id',$course->id) }}
-                                    {!! Form::submit('Add+',['id' => 'enroll-button', 'class' => 'btn btn-outline-dark'])!!}
+                                    {!! Form::submit('Add+',['id' => 'enroll-button', 'class' => 'btn btn-outline-light'])!!}
                                     {!! Form::close() !!}
                                 </div>
                         </tr>

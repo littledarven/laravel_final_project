@@ -1,8 +1,8 @@
 <script>
-    function ConfirmTurnAdmin()
-    {
-        return confirm('Tem certeza desta ação?');
-    }
+	function ConfirmTurnAdmin()
+	{
+		return confirm('Tem certeza desta ação?');
+	}
 </script>
 @extends('layouts.app')
 @section('content')
@@ -28,13 +28,13 @@
 						<tr>
 							<td> {{$student->id}}</td>
 							<td> {{$student->name}}</td>
-							<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{$student->id}}">Visualizar</button></td>
+							<td><button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#myModal{{$student->id}}">Visualizar</button></td>
 							<td>
 								<div id="buttons">
-                                    {!! Form::open(['url' => "/students/$student->id",'method' => 'patch', 'onsubmit' => 'return ConfirmTurnAdmin()']) !!}
-                                    {!! Form::submit('Garantir Acesso',['id' => 'turn_admin-button','class' => 'btn btn-outline-dark'])!!}
-                                    {!! Form::close() !!}
-                                </div>
+									{!! Form::open(['url' => "/students/$student->id",'method' => 'patch', 'onsubmit' => 'return ConfirmTurnAdmin()']) !!}
+									{!! Form::submit('Garantir Acesso',['id' => 'turn_admin-button','class' => 'btn btn-outline-light'])!!}
+									{!! Form::close() !!}
+								</div>
 							</td>
 						</tr>
 						<div class="modal fade" id="myModal{{$student->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -54,8 +54,14 @@
 												@else
 												Sim
 												@endif
+
 											</p>
-											<hr>
+											{{-- <div id="buttons">
+												{!! Form::open(['url' => "/enrollments/$enrollment->pivot->is_authorised",'method' => 'delete', 'onsubmit' => 'return ConfirmTurnAdmin()']) !!}
+												{!! Form::submit('Deletar Matrícula',['id' => 'turn_admin-button','class' => 'btn btn-outline-danger'])!!}
+												{!! Form::close() !!}
+											</div>
+											<hr> --}}
 											@endforeach
 										</div>
 									</div>

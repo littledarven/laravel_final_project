@@ -20,7 +20,7 @@
 
 	<!-- Styles -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
+	<link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css" >
 	
 </head>
 <body>
@@ -41,17 +41,17 @@
 					</ul>
 
 					<!-- Right Side Of Navbar -->
-					<ul class="navbar-nav ml-auto">
+					<ul class="navbar-nav ml-auto" style="color: black">
 						<!-- Authentication Links -->
 						@guest
 						<li class="nav-item">
-							<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+							<a class="nav-link" href="{{ route('login') }}">{{ __('Entrar') }}</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+							<a class="nav-link" href="{{ route('register') }}">{{ __('Registrar-se') }}</a>
 						</li>
 						@else
-						<li class="nav-item dropdown">
+						<li class="nav-item dropdown" style="color: black">
 							<a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="">
 								<i class="far fa-envelope"><span class="badge badge-secondary">{{count(auth()->user()->unreadNotifications)}}</span></i>
 							</a>
@@ -61,14 +61,14 @@
 								@else
 									@foreach(auth()->user()->unreadNotifications as $notification)
 										@if(!(isset($notification->data['user'])))
-											<strong><a class="dropdown-item" href="/notifications/{{$notification->id}}">{{$notification->data['data']}} {{$notification->data['course']}}</a></strong>
+											<strong><a style="color: black" class="dropdown-item" href="/notifications/{{$notification->id}}">{{$notification->data['data']}} {{$notification->data['course']}}</a></strong>
 										@else
-											<strong><a class="dropdown-item" href="/notifications2/{{$notification->id}}">{{$notification->data['data']}}{{$notification->data['user']}} {{$notification->data['course']}}</a></strong>
+											<strong><a style="color: black" class="dropdown-item" href="/notifications2/{{$notification->id}}">{{$notification->data['data']}}{{$notification->data['user']}} {{$notification->data['course']}}</a></strong>
 										
 										@endif
 									@endforeach
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="/notifications">MARCAR TODAS COMO LIDAS</a>
+									<a id= "allread" class="dropdown-item" href="/notifications">MARCAR TODAS COMO LIDAS</a>
 								@endif
 							</div>
 						</li>
@@ -77,9 +77,9 @@
 								{{ Auth::user()->name }} <span class="caret"></span>
 							</a>
 
-							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" id="divlinks">
 								<a class="dropdown-item" href="/enrollments"> Minhas Disciplinas </a>
-								<a class="dropdown-item" href="/courses"> Disciplinas Disponíveis </a>
+								<a class="dropdown-item" href="/courses" > Disciplinas Disponíveis </a>
 								@if(auth()->user()->is_admin==1)
 								<a class="dropdown-item" href="/courses/allcourses">Todas as Disciplinas</a>
 								<a class="dropdown-item" href="/enrollments/activate_enrollments">Autorizações Pendentes</a>

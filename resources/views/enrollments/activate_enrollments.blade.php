@@ -39,7 +39,7 @@
                             <td>
                                 {!! Form::open(['url' => "/enrollments/$enroll",'method' => 'patch', 
                                 'onsubmit' => 'return ConfirmAuthorisation()']) !!}
-                                {!! Form::submit('Autorizar',['id' => 'enroll-button'])!!}
+                                {!! Form::submit('Autorizar',['id' => 'enroll-button', "class" => 'btn btn-outline-light'])!!}
                                 {!! Form::close() !!}
                             </td>
                         </tr>

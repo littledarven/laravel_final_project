@@ -32,7 +32,7 @@
                             <div class="error" style="color: red">{{ $errors->first('total_time') }}</div>
                         @endif
                         
-                        {{ Form::label('max_students', 'Máximo Estudantes',['class'=>'col-sm-2 col-form-label']) }}
+                        {{ Form::label('max_students', 'Máximo Estudantes',['class'=>'col-sm-4 col-form-label']) }}
                         {{ Form::text('max_students',null,['class' => 'form-control col-3','required','type' => 'number']) }}
 
                         @if ($errors->has('max_students'))
