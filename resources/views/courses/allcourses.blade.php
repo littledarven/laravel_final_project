@@ -1,4 +1,4 @@
-<script>    
+<script>
     function ConfirmDelete()
     {
         return confirm('Tem certeza desta ação?');
@@ -35,11 +35,11 @@
                             <td>{{ $course->name }}</td>
                             <td><button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#myModal{{$course->id}}">Visualizar</button></td>
                             <td>
-                                <a href="/courses/{{ $course->id }}/edit" class="btn btn-outline-light" id="edit">Editar</a>
+                                <a href="/courses/{{ $course->id }}/edit" class="btn btn-outline-dark" id="edit">Editar</a>
                             </td>
                             <td>
                                 <div id="buttons">
-                                    {!! Form::open(['url' => "/courses/$course->id",'method' => 'delete', 
+                                    {!! Form::open(['url' => "/courses/$course->id",'method' => 'delete',
                                     'onsubmit' => 'return ConfirmDelete()']) !!}
                                     {{ Form::hidden('id',$course->id) }}
                                     {!! Form::submit('Del-',['id' => 'enroll-button', 'class' => 'btn btn-outline-danger'])!!}
@@ -68,7 +68,7 @@
                     </div>
                     @endforeach
                     {{ $courses->links()}}
-                </table>    
+                </table>
             </main>
         </div>
     </div>

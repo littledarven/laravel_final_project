@@ -1,4 +1,4 @@
-    <script>    
+    <script>
     function ConfirmEnrollment()
     {
         return confirm('Tem certeza desta ação?');
@@ -35,10 +35,10 @@
                             <td><button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#myModal{{$course->id}}">Visualizar</button></td>
                             <td>
                                 <div id="buttons">
-                                    {!! Form::open(['url' => "/enrollments",'method' => 'post', 
+                                    {!! Form::open(['url' => "/enrollments",'method' => 'post',
                                     'onsubmit' => 'return ConfirmEnrollment()']) !!}
                                     {{ Form::hidden('id',$course->id) }}
-                                    {!! Form::submit('Add+',['id' => 'enroll-button', 'class' => 'btn btn-outline-light'])!!}
+                                    {!! Form::submit('Inscrever-me',['id' => 'enroll-button', 'class' => 'btn btn-outline-warning'])!!}
                                     {!! Form::close() !!}
                                 </div>
                         </tr>
@@ -54,7 +54,7 @@
                                         <hr>
                                         <p><b> Carga horária</b> - {{$course->total_time}}h </p>
                                         <p><b> Vagas disponíveis</b> - {{$course->max_students}} restantes</p>
-                                        
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                 @endforeach
-            </table>    
+            </table>
         </main>
     </div>
 </div>

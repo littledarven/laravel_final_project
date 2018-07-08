@@ -1,45 +1,38 @@
 html body
 {
-    background: rgb(30, 30, 48);
-    color: #f7f7f7;
+    background: #EFEFEF;
+
 }
 html body div#app nav
 {
-    background: rgb(0, 0, 0);
+    background: #373737;
 }
 html body div#app div.container a
 {
- 	color: #f7f7f7;   
+ 	color: #f7f7f7;
 }
 
 html body div#app div.container div#divlinks a
 {
- 	color: black;  
+ 	color: black;
 }
 html body div#app div.container a#allread
 {
- 	color: red;  
+ 	color: red;
 }
 body div.card-header
 {
-    background: black;
     color: #f7f7f7;
-    border-style: solid;
-    border-width: 3px;
-    border-color: black;
+    background: #5b5a5a;
 }
 body div.card-body
 {
-    background: rgb(30, 30, 48);
-    color: white;
-    padding: 1px 0 4vw 0;
+    color: black;
+    background: #F4F4F4;
 }
 body div.card
 {
-	border-style: solid;
-    border-width: 5px;
-    border-color: black;
-    border-radius: 10px;
+    color: black;
 }
 body div.row.justify-content-center
 {
@@ -50,7 +43,7 @@ html body div.modal-header
 {
 	color: black;
 }
-html body div.modal-body 
+html body div.modal-body
 {
 	color: black;
 }

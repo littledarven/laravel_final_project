@@ -8,7 +8,7 @@
 @section('content')
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-md-8">
+		<div class="col-md-18">
 			<div class="card">
 				<div class="card-header" style="text-align:center">Alunos e matrículas</div>
 				<div class="card-body">
@@ -17,28 +17,38 @@
 						{{ session('status') }}
 					</div>
 					@endif
-					<table class="table">
+					<table class="table" style="text-align: center">
 						<tr>
 							<th>ID</th>
 							<th>Nome</th>
-							<th>Ver informações</th>
+							<th>CPF</th>
+							<th>RG</th>
+							<th>Endereço</th>
+							<th>Telefone</th>
+							<th>Email</th>
+							<th>Cursos Matriculados</th>
 							<th>Tornar Administrador</th>
 						</tr>
 						@foreach($students as $student)
 						<tr>
 							<td> {{$student->id}}</td>
 							<td> {{$student->name}}</td>
+							<td> {{$student->cpf}}</td>
+							<td> {{$student->rg}}</td>
+							<td> {{$student->address}}</td>
+							<td> {{$student->phone}}</td>
+							<td> {{$student->email}}</td>
 							<td><button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#myModal{{$student->id}}">Visualizar</button></td>
 							<td>
 								<div id="buttons">
 									{!! Form::open(['url' => "/students/$student->id",'method' => 'patch', 'onsubmit' => 'return ConfirmTurnAdmin()']) !!}
-									{!! Form::submit('Garantir Acesso',['id' => 'turn_admin-button','class' => 'btn btn-outline-light'])!!}
+									{!! Form::submit('Garantir Acesso',['id' => 'turn_admin-button','class' => 'btn btn-outline-warning'])!!}
 									{!! Form::close() !!}
 								</div>
 							</td>
 						</tr>
 						@endforeach
-					</table>	
+					</table>
 				</div>
 			</div>
 		</div>
@@ -83,4 +93,3 @@
 	</div>
 @endforeach
 @endsection
-

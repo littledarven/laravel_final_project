@@ -91,7 +91,7 @@
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('address') }}</strong>
                                 </span>
-                                @endif  
+                                @endif
                             </div>
                         </div>
 
@@ -119,7 +119,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-outline-light">
+                                <button type="submit" class="btn btn-outline-dark">
                                     {{ __('Register') }}
                                 </button>
                             </div>

@@ -1,4 +1,4 @@
-<script>    
+<script>
     function ConfirmAuthorisation()
     {
         return confirm('Tem certeza desta ação?');
@@ -22,11 +22,7 @@
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Mais informações</th>
-                            @if(auth()->user()->is_admin==0)
                             <th>Autorizar</th>
-                            @else
-                            <th>Editar</th>
-                            @endif
                         </tr>
                         @foreach($students as $student)
                         @foreach($student->courses as $enrollments)
@@ -37,9 +33,9 @@
                             <td>{{ $enrollments->name }}</td>
                             <?php $enroll = $enrollments->pivot->id ?>
                             <td>
-                                {!! Form::open(['url' => "/enrollments/$enroll",'method' => 'patch', 
+                                {!! Form::open(['url' => "/enrollments/$enroll",'method' => 'patch',
                                 'onsubmit' => 'return ConfirmAuthorisation()']) !!}
-                                {!! Form::submit('Autorizar',['id' => 'enroll-button', "class" => 'btn btn-outline-light'])!!}
+                                {!! Form::submit('Autorizar',['id' => 'enroll-button', "class" => 'btn btn-outline-warning'])!!}
                                 {!! Form::close() !!}
                             </td>
                         </tr>
@@ -48,7 +44,7 @@
                         @endforeach
                         {{ $students->links()}}
 
-                    </table>    
+                    </table>
                 </main>
             </div>
         </div>
